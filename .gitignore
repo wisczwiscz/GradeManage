@@ -1,6 +1,9 @@
 # 忽略 IntelliJ IDEA 相关文件
 .idea/
 
+# 忽略 vscode 相关文件
+.vscode/
+
 # 忽略 Maven 或 Gradle 相关的编译输出
 target/
 out/
