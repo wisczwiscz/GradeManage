@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: backend
+
+  datasource:
+    # 数据源配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 数据库连接地址
+    url: jdbc:mysql://47.121.181.198:3307/vision_wear?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    # 数据库用户名
+    username: root
+    password: 123456
+
+  servlet:
+    multipart:
+      # 文件上传配置
+      max-file-size: 10MB
+      max-request-size: 20MB
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true  # 自动驼峰命名转换
+  mapper-locations: classpath*:/mapper/**/*.xml  # XML 映射文件路径
+
+springdoc:
+  api-docs:
+    # OpenAPI 文档路径
+    path: /v3/api-docs
+  swagger-ui:
+    # Swagger UI 页面路径
+    path: /swagger-ui.html
+knife4j:
+  # 启用 Knife4j
+  enable: true
+  # 开发环境下设置为 false
+  production: false
+
+logging:
+  level:
+    com:
+      wtu:
+        # 日志级别
+        mapper: debug
+        service: info
+        controller: info
