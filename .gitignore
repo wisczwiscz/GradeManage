@@ -1,8 +1,5 @@
 # 忽略 IntelliJ IDEA 相关文件
-.idea/
-*.iml
-*.ipr
-*.iws
+.idea/*
 
 # 忽略 Maven 或 Gradle 相关的编译输出
 target/
