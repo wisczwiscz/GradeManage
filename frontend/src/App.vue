@@ -1,25 +1,27 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted } from 'vue'
+import axios from 'axios'
+import request from './utils/request'
+
+onMounted(() => {
+  // 在这里我们确保全局axios配置和我们的request实例一致
+  axios.defaults.withCredentials = false
+  axios.defaults.headers.common['Content-Type'] = 'application/json'
+  
+  // 设置默认超时时间
+  axios.defaults.timeout = 10000
+})
 </script>
 
 <template>
-  <div>
-
+  <div class="app-container">
+    <router-view />
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style>
+.app-container {
+  width: 100%;
+  min-height: 100vh;
 }
 </style>
