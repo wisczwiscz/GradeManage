@@ -124,12 +124,15 @@ const handleLogin = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f5f7fa;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .login-box {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   padding: 30px;
   background-color: #fff;
   border-radius: 8px;
@@ -155,5 +158,11 @@ const handleLogin = async () => {
   color: #999;
   text-align: center;
   margin-top: 10px;
+}
+
+@media screen and (max-width: 480px) {
+  .login-box {
+    padding: 20px;
+  }
 }
 </style> 

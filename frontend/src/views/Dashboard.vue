@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <el-container>
-      <el-aside width="200px" class="aside">
+      <el-aside width="220px" class="aside">
         <div class="logo">
           <h3>学生成绩管理系统</h3>
         </div>
@@ -87,11 +87,14 @@ const handleCommand = (command) => {
 <style scoped>
 .dashboard-container {
   height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
 .aside {
   background-color: #304156;
   overflow: hidden;
+  transition: width 0.3s;
 }
 
 .logo {
@@ -112,6 +115,8 @@ const handleCommand = (command) => {
   display: flex;
   justify-content: flex-end;
   padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .header-right {
@@ -129,9 +134,28 @@ const handleCommand = (command) => {
 .main {
   background-color: #f5f7fa;
   padding: 20px;
+  width: 100%;
+  height: calc(100vh - 60px);
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .el-menu-vertical {
   border-right: none;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  .el-aside {
+    width: 64px !important;
+  }
+  
+  .el-aside .logo h3 {
+    display: none;
+  }
+  
+  .el-menu-vertical span {
+    display: none;
+  }
 }
 </style> 

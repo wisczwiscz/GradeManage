@@ -41,21 +41,22 @@
         border
         style="width: 100%"
         v-loading="scoreStore.loading"
+        :fit="true"
       >
-        <el-table-column prop="scoreId" label="成绩ID" width="80" />
-        <el-table-column prop="studentId" label="学生ID" width="80" />
-        <el-table-column prop="studentName" label="学生姓名" width="100" />
-        <el-table-column prop="subject" label="科目" width="100" />
-        <el-table-column prop="score" label="分数" width="80" />
-        <el-table-column prop="examDate" label="考试日期" width="120" />
-        <el-table-column prop="status" label="通过状态" width="100">
+        <el-table-column prop="scoreId" label="成绩ID" min-width="80" />
+        <el-table-column prop="studentId" label="学生ID" min-width="80" />
+        <el-table-column prop="studentName" label="学生姓名" min-width="100" />
+        <el-table-column prop="subject" label="科目" min-width="100" />
+        <el-table-column prop="score" label="分数" min-width="80" />
+        <el-table-column prop="examDate" label="考试日期" min-width="120" />
+        <el-table-column prop="status" label="通过状态" min-width="100">
           <template #default="scope">
             <el-tag :type="scope.row.status === '通过' ? 'success' : 'danger'">
               {{ scope.row.status }}
             </el-tag>
           </template>
         </el-table-column>
-        <el-table-column prop="grade" label="等级" width="80">
+        <el-table-column prop="grade" label="等级" min-width="80">
           <template #default="scope">
             <el-tag :type="getTagType(scope.row.grade)">
               {{ scope.row.grade }}
@@ -63,7 +64,7 @@
           </template>
         </el-table-column>
         
-        <el-table-column label="操作" width="180" v-if="userStore.isTeacher">
+        <el-table-column label="操作" min-width="180" v-if="userStore.isTeacher">
           <template #default="scope">
             <el-button 
               size="small" 
@@ -295,21 +296,45 @@ const handleDelete = (row) => {
 <style scoped>
 .scores-container {
   padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .filter-card {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+
+.table-card {
+  width: 100%;
 }
 
 .pagination-container {
   margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+  .filter-card :deep(.el-form-item) {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .filter-card :deep(.el-form--inline) {
+    flex-direction: column;
+  }
+  
+  .filter-card :deep(.el-form-item__content) {
+    width: 100%;
+  }
 }
 </style> 
