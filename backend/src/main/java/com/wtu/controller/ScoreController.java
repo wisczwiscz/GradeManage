@@ -51,7 +51,7 @@ public class ScoreController {
      * @param queryDTO 查询条件
      * @return 成绩列表
      */
-    @PostMapping("/query")
+    @PostMapping(value = "/query", produces = "application/json;charset=UTF-8")
     @Operation(summary = "查询成绩", description = "根据条件查询成绩并支持分页")
     public Result<Page<ScoreDTO>> queryScores(@RequestBody ScoreQueryDTO queryDTO) {
         Page<ScoreDTO> page = scoreService.queryScores(queryDTO);
@@ -64,7 +64,7 @@ public class ScoreController {
      * @param id 成绩ID
      * @return 成绩详情
      */
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json;charset=UTF-8")
     @Operation(summary = "获取成绩详情", description = "根据ID获取成绩详细信息")
     public Result<ScoreDTO> getScoreById(@PathVariable("id") Long id) {
         ScoreDTO scoreDTO = scoreService.getScoreById(id);
@@ -80,7 +80,7 @@ public class ScoreController {
      * @param score 成绩对象
      * @return 更新结果
      */
-    @PutMapping("/update")
+    @PutMapping(value = "/update", produces = "application/json;charset=UTF-8")
     @Operation(summary = "更新成绩", description = "教师更新学生成绩信息")
     public Result<Boolean> updateScore(@RequestBody Score score) {
         try {
@@ -101,7 +101,7 @@ public class ScoreController {
      * @param id 成绩ID
      * @return 删除结果
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/{id}", produces = "application/json;charset=UTF-8")
     @Operation(summary = "删除成绩", description = "教师删除学生成绩")
     public Result<Boolean> deleteScore(@PathVariable("id") Long id) {
         boolean success = scoreService.deleteScore(id);
