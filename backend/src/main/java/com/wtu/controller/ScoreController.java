@@ -30,7 +30,7 @@ public class ScoreController {
      * @param score 成绩对象
      * @return 添加结果
      */
-    @PostMapping("/add")
+    @PostMapping(value = "/add", produces = "application/json;charset=UTF-8")
     @Operation(summary = "添加成绩", description = "教师添加学生的课程成绩")
     public Result<Score> addScore(@RequestBody Score score) {
         try {

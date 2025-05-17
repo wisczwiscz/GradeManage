@@ -29,7 +29,7 @@ public class StatisticsController {
      * @param subject 科目名称
      * @return 统计结果
      */
-    @GetMapping("/subject/{subject}")
+    @GetMapping(value = "/subject/{subject}", produces = "application/json;charset=UTF-8")
     @Operation(summary = "获取科目统计数据", description = "获取指定科目的成绩统计分析数据")
     public Result<StatisticsDTO> getStatisticsBySubject(@PathVariable String subject) {
         StatisticsDTO statistics = statisticsService.getStatisticsBySubject(subject);
@@ -41,7 +41,7 @@ public class StatisticsController {
      *
      * @return 所有科目的统计结果
      */
-    @GetMapping("/basic")
+    @GetMapping(value = "/basic", produces = "application/json;charset=UTF-8")
     @Operation(summary = "获取基础统计数据", description = "获取所有科目的成绩统计分析数据")
     public Result<List<StatisticsDTO>> getAllSubjectsStatistics() {
         List<StatisticsDTO> statisticsList = statisticsService.getAllSubjectsStatistics();

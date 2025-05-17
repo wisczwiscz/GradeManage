@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * Web MVC配置类
@@ -31,6 +34,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/api/scores/add", "/api/scores/update", "/api/scores/*")
                 .order(1);
         */
+    }
+
+    // 全局设置String类型响应为UTF-8编码，防止中文乱码
+    @Override
+    public void configureMessageConverters(List converters) {
+        converters.add(0, new StringHttpMessageConverter(StandardCharsets.UTF_8));
     }
 
     // 已禁用全局CORS配置，改为使用@CrossOrigin注解实现，避免冲突
