@@ -33,8 +33,16 @@ public class ScoreController {
     @PostMapping("/add")
     @Operation(summary = "添加成绩", description = "教师添加学生的课程成绩")
     public Result<Score> addScore(@RequestBody Score score) {
-        Score savedScore = scoreService.addScore(score);
-        return Result.success(savedScore);
+        try {
+            Score savedScore = scoreService.addScore(score);
+            return Result.success(savedScore);
+        } catch (IllegalArgumentException e) {
+            // 捕获验证异常，返回失败结果
+            return Result.fail(e.getMessage());
+        } catch (Exception e) {
+            // 捕获其他异常
+            return Result.fail("添加成绩失败：" + e.getMessage());
+        }
     }
 
     /**
@@ -75,8 +83,16 @@ public class ScoreController {
     @PutMapping("/update")
     @Operation(summary = "更新成绩", description = "教师更新学生成绩信息")
     public Result<Boolean> updateScore(@RequestBody Score score) {
-        boolean success = scoreService.updateScore(score);
-        return success ? Result.success(true) : Result.fail("更新失败");
+        try {
+            boolean success = scoreService.updateScore(score);
+            return success ? Result.success(true) : Result.fail("更新失败");
+        } catch (IllegalArgumentException e) {
+            // 捕获验证异常，返回失败结果
+            return Result.fail(e.getMessage());
+        } catch (Exception e) {
+            // 捕获其他异常
+            return Result.fail("更新成绩失败：" + e.getMessage());
+        }
     }
 
     /**

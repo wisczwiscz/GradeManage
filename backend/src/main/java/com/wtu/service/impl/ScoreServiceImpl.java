@@ -14,6 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,9 +32,60 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
 
     @Override
     public Score addScore(Score score) {
+        // 添加验证逻辑
+        validateScore(score);
+        
         // 保存成绩记录
         save(score);
         return score;
+    }
+    
+    /**
+     * 验证成绩对象
+     *
+     * @param score 成绩对象
+     * @throws IllegalArgumentException 如果验证失败
+     */
+    private void validateScore(Score score) {
+        // 验证学生ID
+        if (score.getStudentId() == null) {
+            throw new IllegalArgumentException("学生ID不能为空");
+        }
+        
+        // 验证学生是否存在
+        Student student = studentMapper.selectById(score.getStudentId());
+        if (student == null) {
+            throw new IllegalArgumentException("学生ID不存在");
+        }
+        
+        // 验证科目
+        if (score.getSubject() == null || score.getSubject().trim().isEmpty()) {
+            throw new IllegalArgumentException("科目不能为空");
+        }
+        
+        // 限制科目名称长度（假设数据库限制为50个字符）
+        if (score.getSubject().length() > 50) {
+            throw new IllegalArgumentException("科目名称过长，不能超过50个字符");
+        }
+        
+        // 验证分数
+        if (score.getScore() == null) {
+            throw new IllegalArgumentException("分数不能为空");
+        }
+        
+        // 验证分数范围
+        if (score.getScore() < 0 || score.getScore() > 100) {
+            throw new IllegalArgumentException("分数必须在0-100之间");
+        }
+        
+        // 验证考试日期
+        if (score.getExamDate() != null) {
+            // 不允许未来日期
+            LocalDate today = LocalDate.now();
+            if (score.getExamDate().isAfter(today)) {
+                throw new IllegalArgumentException("考试日期不能是未来日期");
+            }
+        }
     }
 
     @Override
@@ -87,6 +139,9 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreMapper, Score> implements
 
     @Override
     public boolean updateScore(Score score) {
+        // 添加验证逻辑
+        validateScore(score);
+        
         return updateById(score);
     }
 
