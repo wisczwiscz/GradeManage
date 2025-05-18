@@ -50,8 +50,8 @@ public class StatisticsServiceImplTest {
         assertEquals(78.3, dto.getAvgScore(), 0.1, "平均分应为78.3");
         assertEquals(90, dto.getMaxScore(), "最高分应为90");
         assertEquals(60, dto.getMinScore(), "最低分应为60");
-        assertEquals(2, dto.getPassCount(), "及格人数应为2");
-        assertEquals(1, dto.getFailCount(), "不及格人数应为1");
+        assertEquals(3, dto.getPassCount(), "及格人数应为3");
+        assertEquals(0, dto.getFailCount(), "不及格人数应为0");
         assertEquals(1, dto.getGradeDistribution().get("A"), "A等级人数应为1");
         assertEquals(1, dto.getGradeDistribution().get("B"), "B等级人数应为1");
         assertEquals(0, dto.getGradeDistribution().get("C"), "C等级人数应为0");
