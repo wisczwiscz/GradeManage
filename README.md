@@ -12,7 +12,11 @@ jdk 17
 npm install
 npm run dev
 ```
-
+mvn clean test
+////mvn allure:report   # 生成HTML报告
+////mvn allure:serve    # 在浏览器中查看报告
+allure generate allure-results -o allure-report --clean
+allure open allure-report
 # 学生成绩管理系统简化需求文档
 
 ## 1. 项目概述

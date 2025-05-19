@@ -137,6 +137,21 @@
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>3.10.2</version>
         </dependency>
+
+        <!-- Allure JUnit5 测试报告依赖 -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.23.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- AspectJ 支持Allure AOP功能 -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.19</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -173,6 +188,42 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- 配置maven-surefire-plugin以生成Allure结果 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                    </systemPropertyVariables>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>1.9.19</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Allure Maven插件 -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.11.2</version>
+                <configuration>
+                    <reportVersion>2.13.9</reportVersion>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <reportDirectory>${project.build.directory}/site/allure-maven-plugin</reportDirectory>
+                    <allureDownloadUrl>https://github.com/allure-framework/allure2/releases/download/2.13.9/allure-2.13.9.zip</allureDownloadUrl>
+                </configuration>
             </plugin>
         </plugins>
     </build>
