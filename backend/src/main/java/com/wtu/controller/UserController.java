@@ -36,7 +36,16 @@ public class UserController {
     public Result<User> login(@RequestBody Map<String, String> loginMap) {
         String username = loginMap.get("username");
         String password = loginMap.get("password");
-        
+
+        // 用户名校验：5-10位，必须包含字母和数字
+        if (username == null || !username.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}$")) {
+            return Result.fail("用户名格式不正确，需5-10位且包含字母和数字");
+        }
+        // 密码校验：5-10位，必须包含字母和数字
+        if (password == null || !password.matches("^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d]{5,10}$")) {
+            return Result.fail("密码格式不正确，需5-10位且包含字母和数字");
+        }
+
         User user = userService.login(username, password);
         if (user == null) {
             return Result.fail("用户名或密码错误");
