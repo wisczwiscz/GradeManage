@@ -118,5 +118,5 @@ public class ScoreServiceImplTest {
         System.out.println("【测试按ID查找成绩_不存在】断言通过\n");
     }
 
-    // 你可以继续补充queryScores、updateScore、deleteScore等方法的边界和异常分支
+    // ======= 白盒测试用例已移除，迁移到新类 =======
 } 
