@@ -1,0 +1,18 @@
+[
+  {
+    "name": "失败的测试",
+    "matchedStatuses": ["failed"]
+  },
+  {
+    "name": "已知问题",
+    "matchedStatuses": ["broken"]
+  },
+  {
+    "name": "忽略的测试",
+    "matchedStatuses": ["skipped"]
+  },
+  {
+    "name": "成功测试",
+    "matchedStatuses": ["passed"]
+  }
+] 
